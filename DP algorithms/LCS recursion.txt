@@ -1,0 +1,40 @@
+/*
+Given two sequences, find the length of longest subsequence present in both of them. Both the strings are of uppercase.
+
+Example 1:
+
+Input:
+A = 6, B = 6
+str1 = ABCDGH
+str2 = AEDFHR
+Output: 3
+Explanation: LCS for input Sequences
+“ABCDGH” and “AEDFHR” is “ADH” of
+length 3.
+
+ */
+
+class LCS{
+    static int[][] dp;
+    static int lcs(int p, int q, String s1, String s2){
+        dp = new int[p+1][q+1];
+        for (int[] d : dp) {
+            Arrays.fill(d, -1);
+        }
+        return helper(p, q, s1, s2);
+    }
+    
+    static int helper (int p, int q, String s1, String s2) {
+        if (p == 0 || q == 0) return 0;
+        
+        if (dp[p][q] != -1) return dp[p][q];
+    
+        if (s1.charAt(p-1) == s2.charAt(q-1)) {
+            dp[p][q] = 1 + helper(p-1, q-1, s1, s2);
+        } else {
+            dp[p][q] = Math.max(helper(p-1, q, s1, s2), helper(p, q-1, s1, s2));
+        }
+    
+        return dp[p][q];
+    }
+}
