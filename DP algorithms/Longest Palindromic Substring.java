@@ -1,5 +1,9 @@
 class Solution {
-	public int[][] dp = new int[1001][1001];
+	public int[][] dp;
+	public Solution() {
+	    dp = new int[1001][1001];
+	    for (int[] d : dp) Arrays.fill(d, -1);
+	}
     public int lps(String str, int i, int j) {
         if (i == j) return 1;
         if (i > j) return 0;
